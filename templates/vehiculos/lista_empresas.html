@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Empresas - Concesionario{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1 class="section-title">Nuestras Empresas</h1>
+        
+        <div class="actions-bar" style="margin-bottom: 20px;">
+            <a href="{% url 'empresa_create' %}" class="btn">Añadir nueva empresa</a>
+        </div>
+        
+        <div class="grid">
+            {% for empresa in empresas %}
+            <div class="card">
+                <div class="card-content company-card">
+                    <div class="company-logo">
+                        {% if empresa.logo %}
+                        <img src="{{ empresa.logo.url }}" alt="{{ empresa.nombre }}">
+                        {% else %}
+                        <img src="{% static 'images/default-logo.jpg' %}" alt="{{ empresa.nombre }}">
+                        {% endif %}
+                    </div>
+                    <div class="company-info">
+                        <h3>{{ empresa.nombre }}</h3>
+                        <p>{{ empresa.direccion }}</p>
+                        <div class="company-meta">
+                            <div class="company-meta-item">
+                                <i class="fas fa-phone"></i> {{ empresa.telefono }}
+                            </div>
+                            <div class="company-meta-item">
+                                <i class="fas fa-envelope"></i> {{ empresa.email }}
+                            </div>
+                            {% if empresa.sitio_web %}
+                            <div class="company-meta-item">
+                                <i class="fas fa-globe"></i> <a href="{{ empresa.sitio_web }}" target="_blank">Sitio web</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'vehiculos_por_empresa' empresa.id %}" class="btn">Ver vehículos</a>
+                            <a href="{% url 'empresa_update' empresa.id %}" class="btn btn-secondary">Editar</a>
+                            <a href="{% url 'empresa_delete' empresa.id %}" class="btn btn-accent">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No hay empresas registradas actualmente.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

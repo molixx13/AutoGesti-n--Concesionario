@@ -1,0 +1,5 @@
+#!/bin/bash
+cd /home/ubuntu/ConcesionarioApp
+source /home/ubuntu/ConcesionarioApp/venv/bin/activate
+echo "Entorno virtual activado correctamente."
+echo "Para iniciar el servidor, ejecute: python manage.py runserver"

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Concesionario de Vehículos{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <h1>AutoConcesionario</h1>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                    <li><a href="{% url 'lista_vehiculos' %}">Vehículos</a></li>
+                    <li><a href="{% url 'lista_empresas' %}">Empresas</a></li>
+                    <li><a href="{% url 'buscar_vehiculos' %}">Buscar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AutoConcesionario</h3>
+                    <p>Tu concesionario de confianza para encontrar el vehículo perfecto.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Inicio</a></li>
+                        <li><a href="{% url 'lista_vehiculos' %}">Vehículos</a></li>
+                        <li><a href="{% url 'lista_empresas' %}">Empresas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Ciudad</p>
+                    <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@autoconcesionario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} AutoConcesionario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

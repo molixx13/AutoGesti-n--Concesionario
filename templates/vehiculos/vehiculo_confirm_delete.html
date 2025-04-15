@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Eliminar Vehículo{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1 class="section-title">Eliminar Vehículo</h1>
+        
+        <div class="card">
+            <div class="card-content">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="alert alert-danger">
+                        <p>¿Estás seguro de que deseas eliminar el vehículo "{{ object.modelo }} ({{ object.año }})"?</p>
+                        <p>Esta acción no se puede deshacer.</p>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-accent">Confirmar eliminación</button>
+                        <a href="{% url 'detalle_vehiculo' object.id %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

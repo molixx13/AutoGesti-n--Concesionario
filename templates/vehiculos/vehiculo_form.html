@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ form.instance.id|yesno:"Editar,Crear" }} Vehículo{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1 class="section-title">{{ form.instance.id|yesno:"Editar,Crear nuevo" }} Vehículo</h1>
+        
+        <div class="card">
+            <div class="card-content">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="{{ form.empresa.id_for_label }}">Empresa:</label>
+                        {{ form.empresa }}
+                        {% if form.empresa.errors %}
+                        <div class="error-message">{{ form.empresa.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.modelo.id_for_label }}">Modelo:</label>
+                        {{ form.modelo }}
+                        {% if form.modelo.errors %}
+                        <div class="error-message">{{ form.modelo.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.año.id_for_label }}">Año:</label>
+                        {{ form.año }}
+                        {% if form.año.errors %}
+                        <div class="error-message">{{ form.año.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.precio.id_for_label }}">Precio (€):</label>
+                        {{ form.precio }}
+                        {% if form.precio.errors %}
+                        <div class="error-message">{{ form.precio.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.tipo.id_for_label }}">Tipo:</label>
+                        {{ form.tipo }}
+                        {% if form.tipo.errors %}
+                        <div class="error-message">{{ form.tipo.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.combustible.id_for_label }}">Combustible:</label>
+                        {{ form.combustible }}
+                        {% if form.combustible.errors %}
+                        <div class="error-message">{{ form.combustible.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.color.id_for_label }}">Color:</label>
+                        {{ form.color }}
+                        {% if form.color.errors %}
+                        <div class="error-message">{{ form.color.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.kilometraje.id_for_label }}">Kilometraje:</label>
+                        {{ form.kilometraje }}
+                        {% if form.kilometraje.errors %}
+                        <div class="error-message">{{ form.kilometraje.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+                        {{ form.descripcion }}
+                        {% if form.descripcion.errors %}
+                        <div class="error-message">{{ form.descripcion.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group form-check">
+                        {{ form.disponible }}
+                        <label for="{{ form.disponible.id_for_label }}" class="form-check-label">Disponible</label>
+                        {% if form.disponible.errors %}
+                        <div class="error-message">{{ form.disponible.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.imagen.id_for_label }}">Imagen:</label>
+                        {{ form.imagen }}
+                        {% if form.imagen.errors %}
+                        <div class="error-message">{{ form.imagen.errors }}</div>
+                        {% endif %}
+                        {% if form.instance.imagen %}
+                        <p>Imagen actual: <a href="{{ form.instance.imagen.url }}" target="_blank">Ver imagen</a></p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Guardar</button>
+                        <a href="{% url 'lista_vehiculos' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

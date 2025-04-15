@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ vehiculo.modelo }} - Detalle{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="detail-container">
+            <div class="detail-image">
+                {% if vehiculo.imagen %}
+                <img src="{{ vehiculo.imagen.url }}" alt="{{ vehiculo.modelo }}">
+                {% else %}
+                <img src="{% static 'images/default-car.jpg' %}" alt="{{ vehiculo.modelo }}">
+                {% endif %}
+            </div>
+            <div class="detail-content">
+                <h1>{{ vehiculo.modelo }}</h1>
+                <div class="detail-price">{{ vehiculo.precio }} €</div>
+                
+                <div class="detail-info">
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Marca:</div>
+                        <div>{{ vehiculo.empresa.nombre }}</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Año:</div>
+                        <div>{{ vehiculo.año }}</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Tipo:</div>
+                        <div>{{ vehiculo.tipo }}</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Combustible:</div>
+                        <div>{{ vehiculo.combustible }}</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Color:</div>
+                        <div>{{ vehiculo.color }}</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Kilometraje:</div>
+                        <div>{{ vehiculo.kilometraje }} km</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Disponible:</div>
+                        <div>{% if vehiculo.disponible %}Sí{% else %}No{% endif %}</div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">Fecha de ingreso:</div>
+                        <div>{{ vehiculo.fecha_ingreso }}</div>
+                    </div>
+                </div>
+                
+                <div class="detail-description">
+                    <h3>Descripción</h3>
+                    <p>{{ vehiculo.descripcion|linebreaks }}</p>
+                </div>
+                
+                <div class="actions-bar" style="margin-top: 20px;">
+                    <a href="{% url 'vehiculos_por_empresa' vehiculo.empresa.id %}" class="btn">Ver más vehículos de {{ vehiculo.empresa.nombre }}</a>
+                    <a href="{% url 'vehiculo_update' vehiculo.id %}" class="btn btn-secondary">Editar vehículo</a>
+                    <a href="{% url 'vehiculo_delete' vehiculo.id %}" class="btn btn-accent">Eliminar vehículo</a>
+                </div>
+            </div>
+        </div>
+        
+        {% if vehiculos_relacionados %}
+        <h2 class="related-title">Vehículos relacionados</h2>
+        <div class="grid">
+            {% for vehiculo in vehiculos_relacionados %}
+            <div class="card">
+                <div class="card-image">
+                    {% if vehiculo.imagen %}
+                    <img src="{{ vehiculo.imagen.url }}" alt="{{ vehiculo.modelo }}">
+                    {% else %}
+                    <img src="{% static 'images/default-car.jpg' %}" alt="{{ vehiculo.modelo }}">
+                    {% endif %}
+                    <div class="card-badge">{{ vehiculo.tipo }}</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">{{ vehiculo.modelo }}</h3>
+                    <div class="card-price">{{ vehiculo.precio }} €</div>
+                    <div class="card-footer">
+                        <a href="{% url 'detalle_vehiculo' vehiculo.id %}" class="btn">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

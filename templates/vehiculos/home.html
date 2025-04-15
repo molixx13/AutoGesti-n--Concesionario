@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio - Concesionario de Vehículos{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Encuentra tu vehículo ideal</h1>
+            <p>Explora nuestra amplia selección de vehículos de las mejores marcas y encuentra el que mejor se adapte a tus necesidades.</p>
+            <a href="{% url 'lista_vehiculos' %}" class="btn">Ver todos los vehículos</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Vehículos destacados</h2>
+        <div class="grid">
+            {% for vehiculo in vehiculos %}
+            <div class="card">
+                <div class="card-image">
+                    {% if vehiculo.imagen %}
+                    <img src="{{ vehiculo.imagen.url }}" alt="{{ vehiculo.modelo }}">
+                    {% else %}
+                    <img src="{% static 'images/default-car.jpg' %}" alt="{{ vehiculo.modelo }}">
+                    {% endif %}
+                    <div class="card-badge">{{ vehiculo.tipo }}</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">{{ vehiculo.modelo }}</h3>
+                    <p class="card-text">{{ vehiculo.empresa.nombre }}</p>
+                    <div class="card-price">{{ vehiculo.precio }} €</div>
+                    <p class="card-text">{{ vehiculo.descripcion|truncatechars:100 }}</p>
+                    <div class="card-footer">
+                        <a href="{% url 'detalle_vehiculo' vehiculo.id %}" class="btn">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No hay vehículos disponibles actualmente.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Nuestras marcas</h2>
+        <div class="grid">
+            {% for empresa in empresas %}
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="card-title">{{ empresa.nombre }}</h3>
+                    <p class="card-text">{{ empresa.direccion }}</p>
+                    <div class="card-footer">
+                        <a href="{% url 'vehiculos_por_empresa' empresa.id %}" class="btn">Ver vehículos</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No hay empresas registradas actualmente.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
