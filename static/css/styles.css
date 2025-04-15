@@ -1,12 +1,12 @@
 /* Estilos generales */
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --accent-color: #e74c3c;
-    --light-color: #ecf0f1;
-    --dark-color: #2c3e50;
-    --success-color: #2ecc71;
-    --warning-color: #f39c12;
+    --primary-color: #ff8c00;       /* Naranja de los botones (Get Started/Try Firebase) */
+    --secondary-color: #000000;     /* Negro del fondo */
+    --accent-color: #000000;        /* Verde neón del ícono */
+    --light-color: #ffffff;         /* Blanco del texto principal */
+    --dark-color: #000000;          /* Negro del fondo */
+    --success-color: #a4ff00;       /* Verde neón del ícono */
+    --warning-color: #ff8c00;       /* Naranja de los botones */
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -98,13 +98,13 @@ header .container {
 }
 
 .logo a {
-    color: white;
+    color: rgb(191, 255, 0);
     font-size: 1.5rem;
     font-weight: bold;
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: 2.8rem;
     margin: 0;
 }
 
